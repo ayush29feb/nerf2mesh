@@ -29,3 +29,8 @@ RUN $CONDA_DIR/bin/conda install pytorch torchvision torchaudio cudatoolkit=11.6
 RUN $CONDA_DIR/bin/python -m pip install tqdm scikit-image opencv-python configargparse lpips imageio-ffmpeg kornia lpips tensorboard
 RUN $CONDA_DIR/bin/python -m pip install imageio easydict matplotlib scipy kornia plyfile joblib
 RUN $CONDA_DIR/bin/python -m pip install timm
+
+RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/main/requirements.txt
+RUN pip install -r requirements.txt
+RUN pip install git+https://github.com/NVlabs/nvdiffrast/
+RUN pip install git+https://github.com/facebookresearch/pytorch3d.git

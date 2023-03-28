@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: base # Name your pod here
+spec:
+  restartPolicy: Never
+  containers:
+  - name: base # Name your container here
+    resources:
+      limits:
+        cpu: 16
+        memory: 64Gi
+        nvidia.com/gpu: 1
+    image: "dtr.thefacebook.com/ayush29feb/base:latest" # The docker image you just created
+    volumeMounts:
+    - name: hyperreal
+      mountPath: /mnt/hyperreal
+    command: ["/bin/bash", "-c"]
+    args: ["sleep 1000d"]
+  volumes:
+  - name: hyperreal
+    persistentVolumeClaim:
+      claimName: hyperreal-pvc
+  priorityClassName: high

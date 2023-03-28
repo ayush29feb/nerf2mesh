@@ -20,7 +20,7 @@ RUN conda install --name nerf2mesh pytorch-scatter -c pyg
 # RUN conda install --name nerf2mesh pytorch3d -c pytorch3d
 
 # RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/main/requirements.txt
-# RUN $CONDA_DIR/bin/python -m pip instal                  l -r requirements.txt
+# RUN $CONDA_DIR/bin/python -m pip install -r requirements.txt
 # RUN $CONDA_DIR/bin/python -m pip install pytorch3d
 
 RUN git clone https://github.com/facebookresearch/pytorch3d.git

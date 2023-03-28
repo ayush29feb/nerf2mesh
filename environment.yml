@@ -25,7 +25,7 @@ dependencies:
   - imageio
   - imageio-ffmpeg
   - pymeshlab
-  - torch-scatter
+  # - torch-scatter
   - xatlas
   - scikit-learn
   - torchmetrics

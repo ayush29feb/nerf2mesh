@@ -10,7 +10,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/9cbb2e0211eb238f1c36d1c66271fb1f83885aca/environment.yml
+RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/65f7b74c75cd98ced96e3c5a2a11b81dd3f38eb5/environment.yml
 RUN cat environment.yml
 RUN conda env create -f environment.yml
 RUN conda init bash

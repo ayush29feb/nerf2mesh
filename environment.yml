@@ -1,7 +1,7 @@
 name: nerf2mesh
 dependencies:
 - python>=3.5
-- anaconda
+# - anaconda
 - pip
 - pip:
   - torch

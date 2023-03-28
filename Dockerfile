@@ -19,11 +19,11 @@ RUN useradd --create-home -s /bin/bash --no-user-group -u $USERID $USERNAME && \
 
 # Install miniconda
 ENV PATH $CONDA_DIR/bin:$PATH
-RUN wget --quiet \
-    https://repo.continuum.io/miniconda/Miniconda$CONDA_PYTHON_VERSION-latest-Linux-x86_64.sh && \
-    echo 'export PATH=$CONDA_DIR/bin:$PATH' > /etc/profile.d/conda.sh && \
-    /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p $CONDA_DIR && \
-    rm -rf /tmp/*
+# RUN wget --quiet \
+#     https://repo.continuum.io/miniconda/Miniconda$CONDA_PYTHON_VERSION-latest-Linux-x86_64.sh && \
+#     echo 'export PATH=$CONDA_DIR/bin:$PATH' > /etc/profile.d/conda.sh && \
+#     /bin/bash Miniconda3-latest-Linux-x86_64.sh -b -p $CONDA_DIR && \
+#     rm -rf /tmp/*
 
 
 # ARG CONDA_PYTHON_VERSION=3

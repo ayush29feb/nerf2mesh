@@ -10,13 +10,18 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/65f7b74c75cd98ced96e3c5a2a11b81dd3f38eb5/environment.yml
+RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/75a394a5c5261f3e965926f8bcb9180da8822f4f/environment.yml
 RUN cat environment.yml
 RUN conda env create -f environment.yml
 RUN conda init bash
+RUN echo "conda activate nerf2mesh" >> ~/.bashrc
+
+RUN conda install --name nerf2mesh pytorch-scatter -c pyg
+# RUN conda install --name nerf2mesh pytorch3d -c pytorch3d
+
 # RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/main/requirements.txt
 # RUN $CONDA_DIR/bin/python -m pip instal                  l -r requirements.txt
 # RUN $CONDA_DIR/bin/python -m pip install pytorch3d
 
-# RUN git clone https://github.com/facebookresearch/pytorch3d.git
+RUN git clone https://github.com/facebookresearch/pytorch3d.git
 # RUN $CONDA_DIR/bin/python -m pip install git+https://github.com/NVlabs/nvdiffrast/

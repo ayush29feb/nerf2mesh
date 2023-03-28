@@ -6,8 +6,8 @@ ARG GROUP_NAME=photoreal
 ARG CUDA_ARCH="7.0 7.5 8.0 8.6+PTX"
 ARG CONDA_PYTHON_VERSION=3
 ARG CONDA_DIR=/opt/conda
-ARG USERNAME=docker
-ARG USERID=1000
+ARG USER_NAME=docker
+ARG USER_ID=1000
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Instal basic utilities
@@ -34,14 +34,41 @@ ENV FORCE_CUDA=1
 
 # Copy files
 WORKDIR /home/${USER_NAME}
-COPY --chown=${USER_NAME}:${GROUP_NAME} requirements.txt .
 
 # Install Python libraries
-RUN python -m pip install -r requirements.txt
+RUN python -m pip install \
+    torch \
+    numpy  \
+    scipy \
+    pandas \
+    torch-ema \
+    tensorboardX \
+    torchmetrics
+
+RUN python -m pip install \
+    rich \
+    tqdm \
+    ninja \
+    lpips \
+    trimesh \
+    PyMCubes \
+    dearpygui \
+    packaging \
+    matplotlib
+
+RUN python -m pip install \
+    opencv-python \
+    imageio \
+    imageio-ffmpeg \
+    pymeshlab \
+    xatlas \
+    scikit-learn
 
 # Install pytorch3d from git
 RUN python -m pip install git+https://github.com/facebookresearch/pytorch3d.git --use-feature=in-tree-build
-RUN python -m pip install git+https://github.com/NVlabs/nvdiffrast/
+RUN python -m pip install git+https://github.com/NVlabs/nvdiffrast/ --use-feature=in-tree-build
+
+RUN python -m pip insatll torch-scatter
 
 # Install VSCode dependencies
 ENV PATH=/home/$USER_NAME/.local/bin:$PATH

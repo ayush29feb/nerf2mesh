@@ -10,9 +10,10 @@ ARG DEBIAN_FRONTEND=noninteractive
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/4e40b782d939e4f16d7c8245b0b1ec92a9bd7040/environment.yml
+RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/3ec086c0628cce7da043c3e72bfa4738143af0df/environment.yml
 RUN cat environment.yml
 RUN conda env create -f environment.yml
+RUN conda init bash
 # RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/main/requirements.txt
 # RUN $CONDA_DIR/bin/python -m pip install -r requirements.txt
 # RUN $CONDA_DIR/bin/python -m pip install pytorch3d

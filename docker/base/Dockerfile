@@ -1,5 +1,5 @@
 # Specify your base image here
-FROM nvcr.io/nvidia/pytorch:23.02-py3
+FROM nvcr.io/nvidia/pytorch:22.05-py3
 ARG CONDA_PYTHON_VERSION=3
 ARG CONDA_DIR=/opt/conda
 ARG USERNAME=docker

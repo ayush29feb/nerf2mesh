@@ -6,7 +6,6 @@ dependencies:
 - pip:
   - torch
   - git+https://github.com/NVlabs/nvdiffrast/
-  - pytorch3d
   - rich
   - tqdm
   - ninja

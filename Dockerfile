@@ -35,7 +35,7 @@ ENV PATH $CONDA_DIR/bin:$PATH
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/75a394a5c5261f3e965926f8bcb9180da8822f4f/environment.yml
+RUN wget https://raw.githubusercontent.com/ayush29feb/nerf2mesh/main/environment.yml
 RUN cat environment.yml
 RUN conda env create -f environment.yml
 RUN conda init bash

@@ -64,12 +64,11 @@ RUN python -m pip install \
     xatlas \
     scikit-learn
 
-# Install pytorch3d from git
-RUN python -m pip install git+https://github.com/facebookresearch/pytorch3d.git --use-feature=in-tree-build
-RUN python -m pip install git+https://github.com/NVlabs/nvdiffrast/ --use-feature=in-tree-build
-
-RUN python -m pip insatll torch-scatter
-
 # Install VSCode dependencies
 ENV PATH=/home/$USER_NAME/.local/bin:$PATH
 RUN python -m pip install flake8 yapf
+
+# Install pytorch3d from git
+RUN python -m pip install torch-scatter
+RUN python -m pip install git+https://github.com/NVlabs/nvdiffrast/ --use-feature=in-tree-build
+RUN python -m pip install git+https://github.com/facebookresearch/pytorch3d.git --use-feature=in-tree-build

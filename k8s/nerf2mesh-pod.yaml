@@ -12,6 +12,7 @@ spec:
         memory: 64Gi
         nvidia.com/gpu: 1
     image: "dtr.thefacebook.com/ayush29feb/nerf2mesh:latest" # The docker image you just created
+    imagePullPolicy: Always
     volumeMounts:
     - name: hyperreal
       mountPath: /mnt/hyperreal

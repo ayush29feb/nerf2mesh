@@ -72,3 +72,26 @@ RUN python -m pip install flake8 yapf
 RUN python -m pip install torch-scatter
 RUN python -m pip install git+https://github.com/NVlabs/nvdiffrast/ --use-feature=in-tree-build
 RUN python -m pip install git+https://github.com/facebookresearch/pytorch3d.git --use-feature=in-tree-build
+
+# Install GL libraries
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    pkg-config \
+    libglvnd0 \
+    libgl1 \
+    libglx0 \
+    libegl1 \
+    libgles2 \
+    libglvnd-dev \
+    libgl1-mesa-dev \
+    libegl1-mesa-dev \
+    libgles2-mesa-dev \
+    cmake \
+    curl
+
+USER ${USER_NAME}:${GROUP_NAME}
+
+# Install nerf2mesh modules
+RUN git clone https://github.com/ayush29feb/nerf2mesh
+WORKDIR /home/${USER_NAME}/nerf2mesh
+RUN bash scripts/install_ext.sh

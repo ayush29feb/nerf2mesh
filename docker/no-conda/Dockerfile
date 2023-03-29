@@ -95,3 +95,20 @@ USER ${USER_NAME}:${GROUP_NAME}
 RUN git clone https://github.com/ayush29feb/nerf2mesh
 WORKDIR /home/${USER_NAME}/nerf2mesh
 RUN bash scripts/install_ext.sh
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# for GLEW
+ENV LD_LIBRARY_PATH /usr/lib64:$LD_LIBRARY_PATH
+
+# nvidia-container-runtime
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES compute,utility,graphics
+
+# Default pyopengl to EGL for good headless rendering support
+ENV PYOPENGL_PLATFORM egl
+
+COPY 10_nvidia.json /usr/share/glvnd/egl_vendor.d/10_nvidia.json
+RUN python -m pip uninstall -y nvdiffrast
+RUN python -m pip install git+https://github.com/NVlabs/nvdiffrast/ --use-feature=in-tree-build

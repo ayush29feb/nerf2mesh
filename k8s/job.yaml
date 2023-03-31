@@ -1,0 +1,36 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: 'nerf2mesh'
+spec:
+  ttlSecondsAfterFinished: 60
+  completions: 1
+  parallelism: 4
+  completionMode: Indexed
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: nerf2mesh
+        resources:
+          limits:
+            cpu: 16
+            memory: 64Gi
+            nvidia.com/gpu: 1
+        image: "dtr.thefacebook.com/ayush29feb/nerf2mesh:latest"
+        volumeMounts:
+        - name: hyperreal
+          mountPath: /mnt/hyperreal
+        command:
+          - "bash"
+          - "-c"
+          - |
+            cd /mnt/hyperreal/code/nerf2mesh
+            SCENES=(media_room)
+            python main.py ../../data/photoreal/${SCENES[$JOB_COMPLETION_INDEX]} --workspace ../../logs/photoreal/trail_${SCENES[$JOB_COMPLETION_INDEX]} -O --data_format colmap --bound 16 --enable_cam_center --enable_cam_near_far --scale 0.3 --downscale 4 --stage 0 --lambda_entropy 1e-3 --clean_min_f 16 --clean_min_d 10 --lambda_tv 2e-8 --visibility_mask_dilation 50
+            python main.py ../../data/photoreal/${SCENES[$JOB_COMPLETION_INDEX]} --workspace ../../logs/photoreal/trail_${SCENES[$JOB_COMPLETION_INDEX]}   -O --data_format colmap --bound 16 --enable_cam_center --enable_cam_near_far --scale 0.3 --downscale 4 --stage 1 --iters 10000
+      volumes:
+      - name: hyperreal
+        persistentVolumeClaim:
+          claimName: hyperreal-pvc
+      priorityClassName: high
